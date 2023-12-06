@@ -3,6 +3,15 @@
 ### Author
 Mateusz Łangowski, mateusz.langowski@otomin.pl
 
+### About the code
+This code is not in the best shape and I know it. I tried to get all the functionalities working and almost got it. 
+I know there is a mistake in my phone validation algorithm and a few of them are deleted and a few are doubled.
+There are many error-handling outputs so the user should understand every time, what went wrong.
+There are 3 python files:
+* db.py which contains the main database class
+* sql.py which contains SQL database class
+* script.py contains all the functions and uses 'db.py' and 'sql.py'
+
 ### Admin Actions
 - **Print The Number of All Valid Accounts**
   - Command: `python script.py print-all-accounts`
@@ -42,6 +51,9 @@ Mateusz Łangowski, mateusz.langowski@otomin.pl
          3. Display User Children
          4. Add User
          5. Exit
+    - After first 3 options program shows you the Tables made in SQL. Fourth options gives you and opportunity to add the new user:
+    ![db_photo.png](BOARD.png)
+      	
   
          
 ### User Actions
@@ -63,11 +75,3 @@ Mateusz Łangowski, mateusz.langowski@otomin.pl
          >python script.py find-similar-children-by-age --login 555123456 --password sASfC1234
          Brock, 789543123: Bart, 4; Olive, 2
          John, 432764512: Sally, 2
-### About the code
-This code is not in the best shape and I know it. I tried to get all the functionalities working and almost got it. 
-I know there is a mistake in my phone validation algorithm and a few of them are deleted and a few are doubled.
-There are many error-handling outputs so the user should understand every time, what went wrong.
-There are 3 python files:
-* db.py which contains the main database class
-* sql.py which contains SQL database class
-* script.py contains all the functions and uses 'db.py' and 'sql.py'
