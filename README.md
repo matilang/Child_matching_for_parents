@@ -1,6 +1,8 @@
 ## Child_matching_for_parents
 
-### Code overview
+### Author
+Mateusz Łangowski, mateusz.langowski@otomin.pl
+
 ### Admin Actions
 - **Print The Number of All Valid Accounts**
   - Command: `python script.py print-all-accounts`
@@ -55,9 +57,17 @@
 
 - **Find Users with Children of Same Age**
   - Command: `python script.py find-similar-children-by-age`
-  - Find users with children of the same age as at least one own child, print the user and all of his children data. Sort children alphabetically by name.
+  - Find users with children of the same age as at least one own child, and print the user and all of his children's data. Sort children alphabetically by name.
   - Expected output: list of rows containing `<name-of-parent>,<parents-telephone-number>: <matched-child-name>, <matched-child-age>; <matched-child-name>, <matched-child-age>`
   
          >python script.py find-similar-children-by-age --login 555123456 --password sASfC1234
          Brock, 789543123: Bart, 4; Olive, 2
          John, 432764512: Sally, 2
+### About the code
+This code is not in the best shape and I know it. I tried to get all the functionalities working and almost got it. 
+I know there is a mistake in my phone validation algorithm and a few of them are deleted and a few are doubled.
+There are many error-handling outputs so the user should understand every time, what went wrong.
+There are 3 python files:
+* db.py which contains the main database class
+* sql.py which contains SQL database class
+* script.py contains all the functions and uses 'db.py' and 'sql.py'
