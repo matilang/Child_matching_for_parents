@@ -52,7 +52,9 @@ There are 3 python files:
          4. Add User
          5. Exit
     - After first 3 options program shows you the Tables made in SQL. Fourth options gives you and opportunity to add the new user:
-    ![db_photo.png](BOARD.png)
+    ![db_photo.png](db_photo.png)
+
+    - After adding the new user, we can see it on displays(options 1-3) or exit and see it used in other functionalities
       	
   
          
