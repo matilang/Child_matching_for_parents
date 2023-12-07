@@ -157,43 +157,56 @@ def group_by_age_func(login, password, database):
                 print(f'age: {age}, count: {count}')
 
 def print_children_func(login, password, database):
-    if database.get_user(login):
-        user = database.get_user(login)
-    children = user.children
-    sorted_children = sorted(children, key=lambda x: x.get('name', '').lower())
-    for child in sorted_children:
-        print(f"{child['name']}, {child['age']}")
+        if database.get_user(login):
+            user = database.get_user(login)
+            if (user.telephone_number == login or user.email == login) and user.password == password:
+                pass
+            else:
+                print('Invalid login or password, please try again')
+                return
+            children = user.children
+            sorted_children = sorted(children, key=lambda x: x.get('name', '').lower())
+            for child in sorted_children:
+                print(f"{child['name']}, {child['age']}")
+
 
 def find_similar_children_by_age_func(login, password, database):
-    people = database.get_users(login)
-    main_user = database.get_user(login)
-    similar_children = []
+    if database.get_user(login):
+        user = database.get_user(login)
+        if (user.telephone_number == login or user.email == login) and user.password == password:
+            pass
+        else:
+            print('Invalid login or password, please try again')
+            return
+        people = database.get_users(login)
+        main_user = database.get_user(login)
+        similar_children = []
 
 
-    if not main_user.children:
-        print('You have no children, therefore there is no match')
-        return
+        if not main_user.children:
+            print('You have no children, therefore there is no match')
+            return
 
-    for user in people:
-        matching_children = [child for child in user.children if
-                             any(main_child['age'] == child['age'] for main_child in main_user.children)]
+        for user in people:
+            matching_children = [child for child in user.children if
+                                 any(main_child['age'] == child['age'] for main_child in main_user.children)]
 
-        if matching_children:
-            sorted_children = sorted(matching_children, key=lambda x: x['name'].lower())
-            other_children = [child for child in user.children if child not in matching_children]
-            similar_children.append(
-                {'parent_name': user.firstname,'telephone_number': user.telephone_number, 'matching_children': sorted_children, 'other_children': other_children})
+            if matching_children:
+                sorted_children = sorted(matching_children, key=lambda x: x['name'].lower())
+                other_children = [child for child in user.children if child not in matching_children]
+                similar_children.append(
+                    {'parent_name': user.firstname,'telephone_number': user.telephone_number, 'matching_children': sorted_children, 'other_children': other_children})
 
-    sorted_families = sorted(similar_children,
-                             key=lambda x: (max(child['age'] for child in x['matching_children']), x['parent_name']))
+        sorted_families = sorted(similar_children,
+                                 key=lambda x: (max(child['age'] for child in x['matching_children']), x['parent_name']))
 
-    for family in sorted_families:
-        parent_name = family['parent_name']
-        matching_children_info = "; ".join(
-            [f"{child['name']}, {child['age']}" for child in family['matching_children']])
-        other_children_info = "; ".join([f"{child['name']}, {child['age']}" for child in family['other_children']])
+        for family in sorted_families:
+            parent_name = family['parent_name']
+            matching_children_info = "; ".join(
+                [f"{child['name']}, {child['age']}" for child in family['matching_children']])
+            other_children_info = "; ".join([f"{child['name']}, {child['age']}" for child in family['other_children']])
 
-        print(f"{parent_name}, {family['telephone_number']}: {matching_children_info}; {other_children_info}")
+            print(f"{parent_name}, {family['telephone_number']}: {matching_children_info}; {other_children_info}")
 
 def create_database_func(login, password, database):
     if check_if_admin(login, password, database):
